@@ -43,4 +43,10 @@ est store c6
 ivregress 2sls `y' `year_dummies' RACE MARRIED SMSA `geo_dummies' AGEQ AGEQSQ (`x' = QTR120-QTR129 QTR220-QTR229 QTR320-QTR329 `year_dummies')
 est store c8 
 
+*Export as a table
+esttab c* using `outdir'/Table`i'.tex, replace b(3) se(3) star(* 0.10 ** 0.05 *** 0.01) booktabs ///
+se  ///
+alignment(D{.}{.}{-1}) width(0.9\hsize)  
+
+
 }
