@@ -8,7 +8,8 @@ clear all
 *Please change it to make it work
 global rootdir "C:\Users\xsalgi\Desktop\Task2\2b\AK91"
 cd $rootdir
-
+* Function used throughout
+do "Analysis/Code/programs_stata.do"
 foreach i in IV V VI {
 local infile "Analysis/Input/Table`i'_data"
 local outdir "Analysis/Results"
@@ -48,5 +49,15 @@ esttab c* using `outdir'/Table`i'.tex, replace b(3) se(3) star(* 0.10 ** 0.05 **
 se  ///
 alignment(D{.}{.}{-1}) width(0.9\hsize)  
 
+**********************************************************************************************************************************************
 
-}
+****Using the program
+columns_oddn, y(`y') x(`x') year_dummies(`year_dummies') geo_dummies(`geo_dummies') controlc3(AGEQ AGEQSQ) controlc5(RACE MARRIED SMSA)
+*Export as a table in Latex
+*Outputs are saved with the suffix _p to make them different from the previous one. 
+esttab c* using `outdir'/Table`i'_p.tex, replace b(3) se(3) star(* 0.10 ** 0.05 *** 0.01) booktabs ///
+se   ///
+alignment(D{.}{.}{-1}) width(0.9\hsize)  
+
+}      
+
