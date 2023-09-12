@@ -9,25 +9,26 @@ cd $rootdir
 local infile "Management\Input\NEW7080"
 local outfile "Analysis/Input/TableIV_data.dta"
 use `infile', replace
-rename v1 AGE
-rename v2 AGEQ
-rename v4 EDUC
-rename v5 ENOCENT
-rename v6 ESOCENT
-rename v9 LWKLYWGE
-rename v10 MARRIED
-rename v11 MIDATL
-rename v12 MT
-rename v13 NEWENG
-rename v16 CENSUS
-rename v18 QOB
-rename v19 RACE
-rename v20 SMSA
-rename v21 SOATL
-rename v24 WNOCENT
-rename v25 WSOCENT
-rename v27 YOB
-drop v8
+
+local varlist "v1 v2 v4 v9 v10 v16 v18 v19 v20 v27"
+local varnames "AGE AGEQ EDUC LWKLYWGE MARRIED CENSUS QOB RACE SMSA YOB"
+rename (`varlist') (`varnames')
+*Region of residence dummies
+* Rename region of residence dummies
+local regionlist "v5 v6 v11 v12 v13 v21 v24 v25"
+local regionnames "ENOCENT ESOCENT MIDATL MT NEWENG SOATL WNOCENT WSOCENT"
+rename (`regionlist') (`regionnames')
+*Label
+label variable MARRIED "MARRIED (1=Married)"
+label variable QOB "Quarter of birth"
+label variable RACE "RACE (1=black)"
+label variable SMSA "SMSA (1=center city)"
+label variable YOB "year of birth"
+
+* Drop unnecessary variables
+local dropvars "v8 v3 v7 v14 v15 v17 v22 v23 v26"
+drop (`dropvars')
+
 gen COHORT=20.29
 replace COHORT=30.39 if YOB<=39 & YOB >=30
 replace COHORT=40.49 if YOB<=49 & YOB >=40
