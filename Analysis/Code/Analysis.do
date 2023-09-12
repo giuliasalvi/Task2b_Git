@@ -5,8 +5,6 @@
 ***********************************
 
 clear all
-*Please change it to make it work
-global rootdir "C:\Users\xsalgi\Desktop\Task2\2b\AK91"
 cd $rootdir
 * Function used throughout
 do "Analysis/Code/programs_stata.do"

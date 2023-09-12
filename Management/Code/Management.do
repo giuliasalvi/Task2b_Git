@@ -8,8 +8,6 @@
 *I used xi instead of some loops. You can find the loops I coded before commented
 
 clear all
-*Please change it to make it work
-global rootdir "C:\Users\xsalgi\Desktop\Task2\2b\AK91"
 cd $rootdir
 local infile "Raw/NEW7080"
 local outfile "Analysis/Input"
